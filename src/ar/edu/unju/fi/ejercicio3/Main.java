@@ -2,7 +2,7 @@ package ar.edu.unju.fi.ejercicio3;
 
 import java.util.Scanner;
 
-public class main {
+public class Main {
 
 	public static void main(String[] args) {
 		
