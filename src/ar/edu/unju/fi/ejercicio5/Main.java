@@ -23,7 +23,6 @@ public class Main {
 	                System.out.println(numero + " x " + i + " = " + resultado);
 	            }
 	        }
-
 	        scanner.close();
 	}
 
