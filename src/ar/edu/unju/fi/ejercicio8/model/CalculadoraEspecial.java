@@ -20,11 +20,13 @@ public class CalculadoraEspecial {
 
 
 
-	// Método para calcular la sumatoria
+	// Método para calcular la sumatoria y productoria
     public double calcularSumatoria() {
         double sumatoria = 0;
+       
         for (int i = 1; i <= k; i++) {
-            sumatoria += (Math.pow( (k*(k+1))/2, 2));
+            sumatoria += (Math.pow( ((i*(i+1))/2), 2));
+            
         }
         return sumatoria;
     }
@@ -32,7 +34,7 @@ public class CalculadoraEspecial {
     public double  calcularProductoria() {
     	double productoria=1;
     	for (int i = 1; i <= k; i++) {
-            productoria = productoria * (k*(k+4));
+            productoria = productoria * (i*(i+4));
     	}
     	return (double)productoria;
     }
