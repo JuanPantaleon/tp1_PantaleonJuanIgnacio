@@ -59,7 +59,7 @@ public class Pizza {
 		return adicionalIngredientes40;
 	}
     
-	// Método para calcular el precio de la pizza
+	// precio de la pizza
     public void calcularPrecio() {
         if (diametro == 20) {
             if (ingredientesEspeciales == true)
@@ -80,7 +80,7 @@ public class Pizza {
     }
     
     
-    // Método para calcular el área de la pizza
+    // area de la pizza
     public void calcularArea() {
         area = Math.PI * Math.pow((diametro / 2.0), 2);
     }

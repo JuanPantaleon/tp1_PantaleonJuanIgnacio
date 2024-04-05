@@ -1,15 +1,19 @@
 package ar.edu.unju.fi.ejercicio7.model;
 
-public class Model {
+public class Empleado {
 
 
-	public class Empleado {
 	    private String nombre;
 	    private int legajo;
 	    private double salario;
 	    private static final double salarioMinimo = 210000.00;
 	    private static final double aumentoPorMeritos = 20000.00;
 	    
+	    
+		public Empleado() {
+			super();
+		}
+
 		public Empleado(String nombre, int legajo, double salario) {
 			super();
 			this.nombre = nombre;
@@ -67,4 +71,3 @@ public class Model {
     
     
 	}
-}

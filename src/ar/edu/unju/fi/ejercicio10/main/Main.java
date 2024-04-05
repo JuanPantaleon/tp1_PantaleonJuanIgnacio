@@ -39,7 +39,6 @@ public class Main {
         // Mostrar los detalles de la pizza
         System.out.println("Diámetro = " + pizza.getDiametro());
         System.out.println("Ingredientes especiales = " + pizza.isIngredientesEspeciales());
-      //  System.out.println(pizza.calcularPrecio());
         System.out.println("Precio Pizza = " + pizza.getPrecio() + "$");
         System.out.println("Área de la pizza = " + pizza.getArea());
         System.out.println();
