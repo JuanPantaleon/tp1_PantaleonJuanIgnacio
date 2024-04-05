@@ -17,7 +17,7 @@ public class Model {
 			if (salario >= salarioMinimo) {
 	            this.salario = salario;
 	        } else {
-	            this.salario = salarioMinimo;
+	            this.salario = (double)salarioMinimo;
 	        }
 		}
 
