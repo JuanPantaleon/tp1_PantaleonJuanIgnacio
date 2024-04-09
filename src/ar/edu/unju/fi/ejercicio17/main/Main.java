@@ -15,11 +15,11 @@ public class Main {
 	public static void main(String[] args) {
 		int opcion;
 		Scanner scanner = new Scanner(System.in);
-	//	ArrayList<Jugador> jugadores = new ArrayList<>();
+		Jugador[] jugador = new Jugador();
 		
 		
 		 do {
-	            System.out.println("\nMenú de opciones:");
+	            System.out.println("Menú de opciones:");
 	            System.out.println("1 - Alta de jugador");
 	            System.out.println("2 - Mostrar los datos del jugador");
 	            System.out.println("3 - Mostrar todos los jugadores ordenados por apellido");
