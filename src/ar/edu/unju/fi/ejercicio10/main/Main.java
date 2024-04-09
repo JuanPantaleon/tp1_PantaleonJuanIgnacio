@@ -17,8 +17,8 @@ public class Main {
 
         // Solicitar al usuario que ingrese el diametro
         System.out.print("Ingrese el diámetro de la pizza (20, 30, 40): ");
-        int diametro= Integer.parseInt(scanner.nextLine());
-
+      //  int diametro= Integer.parseInt(scanner.nextLine());
+        	int diametro = scanner.nextInt();
         // Validar diametro
         if (diametro != 20 && diametro != 30 && diametro!= 40) {
             System.out.println("El diámetro ingresado no es válido.");
