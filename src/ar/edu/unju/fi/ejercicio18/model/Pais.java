@@ -2,20 +2,20 @@ package ar.edu.unju.fi.ejercicio18.model;
 
 public class Pais {
 	
-	     private String codigo;
+	     private int codigo;
 	     private String nombre;
 	     
-		public Pais(String codigo, String nombre) {
+		public Pais(int codigo, String nombre) {
 			
 			this.codigo = codigo;
 			this.nombre = nombre;
 		}
 
-		public String getCodigo() {
+		public int getCodigo() {
 			return codigo;
 		}
 
-		public void setCodigo(String codigo) {
+		public void setCodigo(int codigo) {
 			this.codigo = codigo;
 		}
 
