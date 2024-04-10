@@ -4,6 +4,7 @@ package ar.edu.unju.fi.ejercicio17.main;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.Iterator;
@@ -11,212 +12,318 @@ import java.util.Scanner;
 import ar.edu.unju.fi.ejercicio17.model.Jugador;
 
 public class Main {
+	
+	private static final Scanner scanner = new Scanner(System.in);
+    private static ArrayList<Jugador> jugadores = new ArrayList<>();
 
+	
 	public static void main(String[] args) {
-		int opcion;
-		Scanner scanner = new Scanner(System.in);
-		Jugador[] jugador = new Jugador();
 		
-		
-		 do {
-	            System.out.println("Menú de opciones:");
-	            System.out.println("1 - Alta de jugador");
-	            System.out.println("2 - Mostrar los datos del jugador");
-	            System.out.println("3 - Mostrar todos los jugadores ordenados por apellido");
-	            System.out.println("4 - Modificar los datos de un jugador");
-	            System.out.println("5 - Eliminar un jugador");
-	            System.out.println("6 - Mostrar la cantidad total de jugadores");
-	            System.out.println("7 - Mostrar la cantidad de jugadores que pertenecen a una nacionalidad");
-	            System.out.println("8 - Salir");
+		int opcion = 0;
 
-	            try {
-	                System.out.print("Ingrese una opción: ");
-	                opcion = scanner.nextInt();
-	               
+        do {
+            mostrarMenu();
+            try {
+                opcion = scanner.nextInt();
+                scanner.nextLine();
 
-	                switch (opcion) {
-	                    case 1:
-	                        	
-	                    	System.out.print("Alta de Jugador:");
-	                       
-	                        System.out.print("Nombre: ");
-	                        String nombre = scanner.nextLine();
-	                        System.out.print("Apellido: ");
-	                        String apellido = scanner.nextLine();
-	                        
-	                        System.out.print("Ingrese la fecha de nacimiento (formato DD/MM/AAAA): ");
-	                        String fechaStr = scanner.nextLine();
-	                        String[] partesFecha = fechaStr.split("/");
-	                        int dia = Integer.parseInt(partesFecha[0]);
-	                        int mes = Integer.parseInt(partesFecha[1]) - 1;
-	                        int anno = Integer.parseInt(partesFecha[2]);
-	                        Calendar fechaNacimiento = Calendar.getInstance();
-	                        fechaNacimiento.set(anno, mes, dia);
-	                        
-	                        System.out.print("Nacionalidad: ");
-	                        String nacionalidad = scanner.nextLine();
-	                        System.out.print("Estatura: ");
-	                        double estatura = scanner.nextDouble();
-	                        System.out.print("Peso: ");
-	                        double peso = scanner.nextDouble();
-	                        scanner.nextLine();
-	                        System.out.print("Posición: ");
-	                        String posicion = scanner.nextLine();
-
-	                        
-	                        Jugador jugador = new Jugador(nombre, apellido, fechaNacimiento, nacionalidad, estatura, peso, posicion);
-	                //        jugadores.add(jugador);
-
-	                        System.out.println("Jugador añadido correctamente.");
-	                        
-	                        break;
-	                    case 2:
-	                        
-	                    	 System.out.println("Mostrar datos del jugador:");
-
-	                         System.out.print("Ingrese el nombre del jugador: ");
-	                          nombre = scanner.nextLine();
-	                         System.out.print("Ingrese el apellido del jugador: ");
-	                          apellido = scanner.nextLine();
-
-	                         
-	                         for (Jugador jugador : jugadores) {
-	                             if (jugador.getNombre().equalsIgnoreCase(nombre) && jugador.getApellido().equalsIgnoreCase(apellido)) {
-	                                 
-	                                 System.out.println(jugador);
-	                                 return;
-	                             }
-	                         }
-
-	                         System.out.println("Jugador no encontrado.");
-	                     
-	                        break;
-	                    case 3:
-	                    	System.out.println("Mostrar jugadores ordenados por apellido:");
-
-	                        
-	                        jugadores.sort(Comparator.comparing(Jugador::getApellido));
-
-	                        
-	                        for (Jugador jugador : jugadores) {
-	                            System.out.println(jugador);
-	                        }
-	                    	
-	                        break;
-	                    case 4:
-	                    	System.out.println("Modificar los datos de un jugador:");
-
-	                        
-	                        System.out.print("Ingrese el nombre del jugador: ");
-	                        String nombre = scanner.nextLine();
-	                        System.out.print("Ingrese el apellido del jugador: ");
-	                        String apellido = scanner.nextLine();
-
-	                        
-	                        for (Jugador jugador : jugadores) {
-	                            if (jugador.getNombre().equalsIgnoreCase(nombre) && jugador.getApellido().equalsIgnoreCase(apellido)) {
-	                                
-	                                System.out.print("Nuevo nombre: ");
-	                                jugador.setNombre(scanner.nextLine());
-	                                System.out.print("Nuevo apellido: ");
-	                                jugador.setApellido(scanner.nextLine());
-	                                
-	                                System.out.print("Nueva fecha de nacimiento (formato DD/MM/AAAA): ");
-	                                 fechaStr = scanner.nextLine();
-	    	                         partesFecha = fechaStr.split("/");
-	    	                         dia = Integer.parseInt(partesFecha[0]);
-	    	                         mes = Integer.parseInt(partesFecha[1]) - 1;
-	    	                         anno = Integer.parseInt(partesFecha[2]);
-	    	                         fechaNacimiento = Calendar.getInstance();
-	    	                         jugador.setFechaNacimiento(anno, mes, dia);
-	    	                        
-	                                System.out.print("Nueva nacionalidad: ");
-	                                jugador.setNacionalidad(scanner.nextLine());
-	                                System.out.print("Nueva estatura: ");
-	                                jugador.setEstatura(scanner.nextDouble());
-	                                System.out.print("Nuevo peso: ");
-	                                jugador.setPeso(scanner.nextDouble());
-	                                System.out.print("Nueva posición: ");
-	                                jugador.setPosicion(scanner.nextLine());
-
-	                                System.out.println("Datos modificados correctamente.");
-	                                return;
-	                            }
-	                        }
-
-	                        System.out.println("Jugador no encontrado.");
-	                    	
-	                    	
-	                        break;
-	                    case 5:
-	                    	
-	                    	System.out.println("Eliminar un jugador:");
-
-	                        
-	                        System.out.print("Ingrese el nombre del jugador: ");
-	                         nombre = scanner.nextLine();
-	                        System.out.print("Ingrese el apellido del jugador: ");
-	                         apellido = scanner.nextLine();
-
-	                       
-	                        Iterator<Jugador> iterator = jugadores.iterator();
-	                        while (iterator.hasNext()) {
-	                            Jugador jugador = iterator.next();
-	                            if (jugador.getNombre().equalsIgnoreCase(nombre) && jugador.getApellido().equalsIgnoreCase(apellido)) {
-	                                iterator.remove();
-	                                System.out.println("Jugador eliminado correctamente.");
-	                                return;
-	                            }
-	                        }
-
-	                        System.out.println("Jugador no encontrado.");
-	                        
-	                        break;
-	                    case 6:
-	                    	
-	                    	System.out.println("Cantidad total de jugadores: " + jugadores.size());
-	                
-	                        
-	                        break;
-	                    case 7:
-	                        
-	                    	System.out.println("Mostrar la cantidad de jugadores por nacionalidad:");
-
-	                       
-	                        System.out.print("Ingrese la nacionalidad: ");
-	                         nacionalidad = scanner.nextLine();
-
-	                        
-	                        int contador = 0;
-	                        for (Jugador jugador : jugadores) {
-	                            if (jugador.getNacionalidad().equalsIgnoreCase(nacionalidad)) {
-	                                contador++;
-	                            }
-	                        }
-
-	                        System.out.println("Cantidad de jugadores de " + nacionalidad + ": " + contador);
-	                    
-	                    	
-	                        break;
-	                    case 8:
-	                    	
-	                        System.out.println("Saliendo del programa...");
-	                        break;
-	                        
-	                    default:
-	                        System.out.println("Opción no válida, por favor intente de nuevo.");
-	                        break;
-	                }
-	            } catch (InputMismatchException) {
-	                System.out.println("Error: Por favor ingrese un número.");
-	            
-	                opcion = 0;
-	            }
-	        } while (opcion != 8);
-	        scanner.close();
-	    }
-		
-		
+                switch (opcion) {
+                    case 1:
+                        altaJugador();
+                        break;
+                    case 2:
+                        mostrarDatosJugador();
+                        break;
+                    case 3:
+                        mostrarJugadoresPorApellido();
+                        break;
+                    case 4:
+                        modificarJugador();
+                        break;
+                    case 5:
+                        eliminarJugador();
+                        break;
+                    case 6:
+                        mostrarCantidadJugadores();
+                        break;
+                    case 7:
+                        mostrarJugadoresPorNacionalidad();
+                        break;
+                    case 8:
+                        System.out.println("Saliendo del sistema...");
+                        break;
+                    default:
+                        System.out.println("Opción no válida. Ingrese un valor entre 1 y 8.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Error: Debe ingresar un número entero.");
+            } catch (Exception e) {
+                System.out.println("Se ha producido un error: " + e.getMessage());
+            } finally {
+                scanner.nextLine(); 
+            }
+        } while (opcion != 8);
     }
+
+    private static void mostrarMenu() {
+        System.out.println("\n**Menú de opciones**");
+        System.out.println("1. Alta de jugador");
+        System.out.println("2. Mostrar datos del jugador");
+        System.out.println("3. Mostrar todos los jugadores ordenados por apellido");
+        System.out.println("4. Modificar los datos de un jugador");
+        System.out.println("5. Eliminar un jugador");
+        System.out.println("6. Mostrar la cantidad total de jugadores");
+        System.out.println("7. Mostrar la cantidad de jugadores por nacionalidad");
+        System.out.println("8. Salir");
+        System.out.print("Ingrese la opción deseada: ");
+    }
+
+    private static void altaJugador() {
+        System.out.println("\n**Alta de jugador**");
+
+        try {
+            System.out.print("Nombre: ");
+            String nombre = scanner.nextLine();
+
+            System.out.print("Apellido: ");
+            String apellido = scanner.nextLine();
+
+            System.out.print("Fecha de nacimiento (dd/mm/aaaa): ");
+            String fechaNacimiento = scanner.nextLine();
+
+            System.out.print("Nacionalidad: ");
+            String nacionalidad = scanner.nextLine();
+
+            System.out.print("Estatura (m): ");
+            double estatura = scanner.nextDouble();
+
+            System.out.print("Peso (kg): ");
+            double peso = scanner.nextDouble();
+
+            System.out.print("Posición (delantero, medio, defensa, arquero): ");
+            String posicion = scanner.nextLine();
+
+            Jugador jugador = new Jugador(nombre, apellido, fechaNacimiento, nacionalidad, estatura, peso, posicion);
+            jugadores.add(jugador);
+
+            System.out.println("\nJugador registrado exitosamente!");
+        } catch (Exception e) {
+            System.out.println("Se ha producido un error al registrar el jugador: " + e.getMessage());
+        }
+    }
+
+    private static void mostrarDatosJugador() {
+        System.out.println("\n**Mostrar datos del jugador**");
+
+        try {
+            System.out.print("Ingrese el nombre del jugador: ");
+            String nombre = scanner.nextLine();
+
+            System.out.print("Ingrese el apellido del jugador: ");
+            String apellido = scanner.nextLine();
+
+            Jugador jugador = buscarJugador(nombre, apellido);
+
+            if (jugador != null) {
+                System.out.println("\n**Datos del jugador**");
+                System.out.println("Nombre: " + jugador.getNombre());
+                System.out.println("Apellido: " + jugador.getApellido());
+                System.out.println("Fecha de nacimiento: " + jugador.getFechaNacimiento());
+                System.out.println("Edad: " + jugador.calcularEdad() + " años");
+                System.out.println("Nacionalidad: " + jugador.getNacionalidad());
+                System.out.println("Estatura: " + jugador.getEstatura() + " m");
+                System.out.println("Peso: " + jugador.getPeso() + " kg");
+                System.out.println("Posición: " + jugador.getPosicion());
+            } else {
+                System.out.println("Jugador no encontrado.");
+            }
+        } catch (Exception e) {
+            System.out.println("Se ha producido un error al mostrar los datos del jugador: " + e.getMessage());
+        }
+    }
+    
+    
+    
+    
+    private static void mostrarJugadoresPorApellido() {
+        System.out.println("\n**Mostrar jugadores por apellido**");
+
+        Collections.sort(jugadores, (jugador1, jugador2) -> jugador1.getApellido().compareTo(jugador2.getApellido()));
+
+        for (Jugador jugador : jugadores) {
+            System.out.println("\n**Datos del jugador**");
+            System.out.println("Nombre: " + jugador.getNombre());
+            System.out.println("Apellido: " + jugador.getApellido());
+            System.out.println("Fecha de nacimiento: " + jugador.getFechaNacimiento());
+            System.out.println("Nacionalidad: " + jugador.getNacionalidad());
+            System.out.println("Estatura: " + jugador.getEstatura() + " m");
+            System.out.println("Peso: " + jugador.getPeso() + " kg");
+            System.out.println("Posición: " + jugador.getPosicion());
+        }
+    }
+    
+    
+    
+    private static void modificarJugador() {
+        System.out.println("\n**Modificar datos del jugador**");
+
+        try {
+            System.out.print("Ingrese el nombre del jugador: ");
+            String nombre = scanner.nextLine();
+
+            System.out.print("Ingrese el apellido del jugador: ");
+            String apellido = scanner.nextLine();
+
+            Jugador jugador = buscarJugador(nombre, apellido);
+
+            if (jugador != null) {
+                System.out.println("\n**Datos del jugador**");
+                System.out.println("Nombre: " + jugador.getNombre());
+                System.out.println("Apellido: " + jugador.getApellido());
+                System.out.println("Fecha de nacimiento: " + jugador.getFechaNacimiento());
+                System.out.println("Nacionalidad: " + jugador.getNacionalidad());
+                System.out.println("Estatura: " + jugador.getEstatura() + " m");
+                System.out.println("Peso: " + jugador.getPeso() + " kg");
+                System.out.println("Posición: " + jugador.getPosicion());
+
+                System.out.println("\n¿Qué desea modificar?");
+                System.out.println("1. Nombre");
+                System.out.println("2. Apellido");
+                System.out.println("3. Fecha de nacimiento");
+                System.out.println("4. Nacionalidad");
+                System.out.println("5. Estatura");
+                System.out.println("6. Peso");
+                System.out.println("7. Posición");
+                System.out.print("Ingrese la opción deseada: ");
+
+                int opcionModificar = scanner.nextInt();
+                scanner.nextLine(); // Consumir el salto de línea
+
+                switch (opcionModificar) {
+                    case 1:
+                        System.out.print("Nuevo nombre: ");
+                        jugador.setNombre(scanner.nextLine());
+                        break;
+                    case 2:
+                        System.out.print("Nuevo apellido: ");
+                        jugador.setApellido(scanner.nextLine());
+                        break;
+                    case 3:
+                        System.out.print("Nueva fecha de nacimiento (dd/mm/aaaa): ");
+                        jugador.setFechaNacimiento(scanner.nextLine());
+                        break;
+                    case 4:
+                        System.out.print("Nueva nacionalidad: ");
+                        jugador.setNacionalidad(scanner.nextLine());
+                        break;
+                    case 5:
+                        System.out.print("Nueva estatura (m): ");
+                        jugador.setEstatura(scanner.nextDouble());
+                        break;
+                    case 6:
+                        System.out.print("Nuevo peso (kg): ");
+                        jugador.setPeso(scanner.nextDouble());
+                        break;
+                    case 7:
+                        System.out.print("Nueva posición (delantero, medio, defensa, arquero): ");
+                        jugador.setPosicion(scanner.nextLine());
+                        break;
+                    default:
+                        System.out.println("Opción no válida.");
+                }
+
+                System.out.println("\nDatos del jugador modificados exitosamente!");
+            } else {
+                System.out.println("Jugador no encontrado.");
+            }
+        } catch (Exception e) {
+            System.out.println("Se ha producido un error al modificar los datos del jugador: " + e.getMessage());
+        }
+    }
+
+    private static void eliminarJugador() {
+        System.out.println("\n**Eliminar jugador**");
+
+        try {
+            System.out.print("Ingrese el nombre del jugador: ");
+            String nombre = scanner.nextLine();
+
+            System.out.print("Ingrese el apellido del jugador: ");
+            String apellido = scanner.nextLine();
+
+            Jugador jugador = buscarJugador(nombre, apellido);
+
+            if (jugador != null) {
+                System.out.println("\n**Datos del jugador**");
+                System.out.println("Nombre: " + jugador.getNombre());
+                System.out.println("Apellido: " + jugador.getApellido());
+                System.out.println("Fecha de nacimiento: " + jugador.getFechaNacimiento());
+                System.out.println("Nacionalidad: " + jugador.getNacionalidad());
+                System.out.println("Estatura: " + jugador.getEstatura() + " m");
+                System.out.println("Peso: " + jugador.getPeso() + " kg");
+                System.out.println("Posición: " + jugador.getPosicion());
+
+                System.out.println("\n¿Está seguro de que desea eliminar este jugador? (s/n)");
+                String confirmacion = scanner.nextLine();
+
+                if (confirmacion.equalsIgnoreCase("s")) {
+                    jugadores.remove(jugador);
+                    System.out.println("\nJugador eliminado exitosamente!");
+                } else {
+                    System.out.println("\nEliminación cancelada.");
+                }
+            } else {
+                System.out.println("Jugador no encontrado.");
+            }
+        } catch (Exception e) {
+            System.out.println("Se ha producido un error al eliminar el jugador: " + e.getMessage());
+        }
+    }
+
+    private static void mostrarCantidadJugadores() {
+        System.out.println("\n**Cantidad total de jugadores:** " + jugadores.size());
+    }
+    
+    
+    private static void mostrarJugadoresPorNacionalidad() {
+        System.out.println("\n**Mostrar jugadores por nacionalidad**");
+
+        System.out.print("Ingrese la nacionalidad: ");
+        String nacionalidad = scanner.nextLine();
+
+        int contador = 0;
+
+        for (Jugador jugador : jugadores) {
+            if (jugador.getNacionalidad().equalsIgnoreCase(nacionalidad)) {
+                contador++;
+
+                System.out.println("\n**Datos del jugador**");
+                System.out.println("Nombre: " + jugador.getNombre());
+                System.out.println("Apellido: " + jugador.getApellido());
+                System.out.println("Fecha de nacimiento: " + jugador.getFechaNacimiento());
+                System.out.println("Estatura: " + jugador.getEstatura() + " m");
+                System.out.println("Peso: " + jugador.getPeso() + " kg");
+                System.out.println("Posición: " + jugador.getPosicion());
+            }
+        }
+
+        if (contador == 0) {
+            System.out.println("No hay jugadores de esa nacionalidad.");
+        }
+    }
+
+    
+    private static Jugador buscarJugador(String nombre, String apellido) {
+        for (Jugador jugador : jugadores) {
+            if (jugador.getNombre().equalsIgnoreCase(nombre) && jugador.getApellido().equalsIgnoreCase(apellido)) {
+                return jugador;
+            }
+        }
+        return null;
+    }
+
+    
+    
+}
 
 
